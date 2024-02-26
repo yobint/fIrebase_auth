@@ -7,7 +7,7 @@ import {
     createUserWithEmailAndPassword,
     signOut
 } from 'firebase/auth';
-/*import { getFirestore, doc, setDoc } from "firebase/firestore";*/
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 
 const firebaseApp = initializeApp({
@@ -28,20 +28,21 @@ const auth = getAuth(firebaseApp);
     } else {
         console.log('No user');
     }
-});
+});*/
 
 const db = getFirestore(firebaseApp);
 const firestore = getFirestore();
 
-const userList = doc(firestore, 'newUser/2024-02-22');
+const newUser = doc(firestore, 'userInfo/userList');
 function writeNewUser() {
     const docData = {
-        email: 'limatars.ensino@gmail.com',
-        uid: 'FCCNYI8t02GLpKMqF28UxJQjhL4s',
+        email: '',
+        uid: ''
     };
     setDoc(newUser, docData, { merge: true});
 };
-writeNewUser()*/
+
+writeNewUser();
 
 connectAuthEmulator(auth, "http://localhost:9099");
 
@@ -76,7 +77,8 @@ btnSignup.addEventListener("click", createAccount);
 const monitorAuthState = async () => {
     onAuthStateChanged(auth, user => {
         if (user != null) {
-            console.log('logged in');
+            console.log('logged in')
+            console.log(user);
         }
         else {
             console.log("no user");
